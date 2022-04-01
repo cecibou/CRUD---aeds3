@@ -61,6 +61,7 @@ public class Arquivo<T extends Registro> {
 
     //então mover o ponteiro para pos
     arquivo.seek(p.getEndereco());
+
     // ler registro
     byte lapide = arquivo.readByte();
     int tamanho = arquivo.readShort();
@@ -130,29 +131,25 @@ public class Arquivo<T extends Registro> {
     // pos ← buscar o ID no índice
     ParIDEndereco p = indiceDireto.read(id);
 
-    if (p == null)
-      // mover o ponteiro para pos
+    if (p == null){
+      return false;
+    }
+    
+    // mover o ponteiro para pos
     arquivo.seek(p.getEndereco());
 
     //ler registro  
     byte lapide = arquivo.readByte();
-    int tamanho = arquivo.readShort();
-    byte[] ba = new byte[tamanho];
     
     if (lapide != '*') {
-      // extrair objeto do registro
-      arquivo.read(ba);
-      T entidade = construtor.newInstance();
-      entidade.fromByteArray(ba);
       // mover para pos
       arquivo.seek(p.getEndereco());
       //lápide excuído
       arquivo.writeByte('*');
       //remover indice
       indiceDireto.delete(id);
-      //confrimação
-      if (entidade.getID() == id)
-        return true;
+      
+      return true;
     }
     
     return false;

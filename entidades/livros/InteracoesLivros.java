@@ -148,13 +148,16 @@ public class InteracoesLivros {
     }
 
     try {
-      boolean l = arqLivros.delete(id);
+      if(arqLivros.delete(id)){
+        System.out.println("\nLivro excluído");
+      }else{
+        System.out.println("\nLivro já foi excluído");
+      }
+      
     } catch (Exception e) {
       System.out.println("Erro no acesso ao arquivo");
       e.printStackTrace();
     }
-
-    System.out.println("\nLivro excluído");
 
   }
 

@@ -26,21 +26,18 @@ public class InteracoesClientes {
     }
   
     public Cliente leCliente() throws Exception {
-      System.out.print("\nID ");
-      int ID = console.nextInt();
-      System.out.print("\nNome ");
+      System.out.print("\nNome: ");
       String nome = console.nextLine();
       System.out.print("\nEmail: ");
       String email = console.nextLine();
-      Cliente l = new Cliente(ID, nome, email);
+      Cliente l = new Cliente(nome, email);
       return l;
     }
   
     public void mostraCliente(Cliente l) {
       System.out.println(
-          "\nID: " + l.getID() +
-              "\nNome: " + l.getNome() +
-              "\nEmail: " + l.getEmail());
+            "\nNome: " + l.getNome() +
+            "\nEmail: " + l.getEmail());
     }
   
     public void menuClientes() {
@@ -123,11 +120,72 @@ public class InteracoesClientes {
   
     }
   
-    public void alterarCliente(){
+    public void alterarCliente() throws Exception{
+      int id;
+      System.out.print("\nID do Cliente: ");
+      try {
+        id = Integer.valueOf(console.nextLine());
+      } catch (NumberFormatException e) {
+        System.out.println("ID inválido.");
+        return;
+      }
+      int opcao;
+      Cliente l = arqClientes.read(id);
+      do {
+        System.out.println("\nMENU PARA ALTERAR CLIENTES");
+        System.out.println("\n1) Alterar Nome");
+        System.out.println("2) Buscar Cliente");
+        System.out.println("\n0) Retornar ao menu anterior");
   
+        System.out.print("\nOpção: ");
+        try {
+          opcao = Integer.valueOf(console.nextLine());
+        } catch (NumberFormatException e) {
+          opcao = -1;
+        }
+        
+        switch (opcao) {
+          case 1:
+          System.out.print("\nNome: ");
+          String nome = console.nextLine();
+          l.setNome(nome);
+            break;
+          case 2:
+          System.out.print("\nEmail: ");
+          String email = console.nextLine();
+          l.setEmail(email);
+            break;
+          case 0:
+            break;
+          default:
+            System.out.println("Opção inválida");
+        }
+      } while (opcao != 0);
+
+      arqClientes.update(l);
     }
   
-    public void excluirCliente(){
-      
+    public void excluirCliente() throws Exception{
+      int id;
+      System.out.print("\nID do Cliente: ");
+      try {
+        id = Integer.valueOf(console.nextLine());
+      } catch (NumberFormatException e) {
+        System.out.println("ID inválido.");
+        return;
+      }
+  
+      try {
+        if(arqClientes.delete(id)){
+          System.out.println("\nCliente excluído");
+        }else{
+          System.out.println("\nCliente já foi excluído");
+        }
+        
+      } catch (Exception e) {
+        System.out.println("Erro no acesso ao arquivo");
+        e.printStackTrace();
+      }
+  
     }
 }
