@@ -53,7 +53,7 @@ public class InteracoesLivros {
             "\nData de lançamento: " + l.getLancamento());
   }
 
-  public void menuLivros() {
+  public void menuLivros() throws Exception {
     int opcao;
     do {
       System.out.println("\nMENU DE LIVROS");
@@ -133,8 +133,66 @@ public class InteracoesLivros {
 
   }
 
-  public void alterarLivro(){
-
+  public void alterarLivro() throws Exception{
+    int id;
+      System.out.print("\nID do Cliente: ");
+      try {
+        id = Integer.valueOf(console.nextLine());
+      } catch (NumberFormatException e) {
+        System.out.println("ID inválido.");
+        return;
+      }
+      int opcao;
+      Livro l = arqLivros.read(id);
+      do {
+        System.out.println("\nMENU DE ALTERACAO");
+        System.out.println("\n1) Alterar o Título");
+        System.out.println("2) Alterar o Autor");
+        System.out.println("3) Alterar o Preço");
+        System.out.println("4) Alterar a data de lançamento (dd/mm/aaaa)");
+        System.out.println("\n0) Retornar ao menu anterior");
+  
+        System.out.print("\nOpção: ");
+        try {
+          opcao = Integer.valueOf(console.nextLine());
+        } catch (NumberFormatException e) {
+          opcao = -1;
+        }
+  
+        switch (opcao) {
+          case 1:
+            System.out.print("\nTítulo: ");
+            String titulo = console.nextLine();
+            l.setTitulo(titulo);
+            break;
+          case 2:
+            System.out.print("\nAutor: ");
+            String autor = console.nextLine();
+            l.setAutor(autor);
+            break;
+          case 3:
+            System.out.print("\nPreço: ");
+            float preco = Float.parseFloat(console.nextLine());
+            l.setPreco(preco);
+            break;
+          case 4:
+            System.out.print("\nData de lançamento (dd/mm/aaaa): ");
+            String[] partesData = console.nextLine().split("/");
+            Calendar lancamento = Calendar.getInstance();
+            lancamento.set(
+                Integer.parseInt(partesData[2]),
+                Integer.parseInt(partesData[1]) - 1,
+                Integer.parseInt(partesData[0]));
+            l.setLancamento(lancamento.getTimeInMillis());
+            break;
+          case 0:
+            break;
+          default:
+            System.out.println("Opção inválida");
+        }
+      } while (opcao != 0);
+      
+      arqLivros.update(l);
   }
 
   public void excluirLivro(){

@@ -25,17 +25,17 @@ public class Arquivo<T extends Registro> {
   }
 
   public int create(T entidade) throws Exception {
-    //mover o ponteiro para início do arquivo (cabeçalho)
+    // mover o ponteiro para início do arquivo (cabeçalho)
     arquivo.seek(0);
-    //ler últimoID
+    // ler últimoID
     int ultimoID = arquivo.readInt();
-    //bjeto.ID ← últimoID + 1
+    // bjeto.ID ← últimoID + 1
     int novoID = ultimoID + 1;
 
     entidade.setID(novoID);
-    //mover o ponteiro para início do arquivo
+    // mover o ponteiro para início do arquivo
     arquivo.seek(0);
-    //escrever objeto.ID
+    // escrever objeto.ID
     arquivo.writeInt(novoID);
 
     // Movimenta o ponteiro do arquivo para o ponto de inserção do novo registro
@@ -55,11 +55,11 @@ public class Arquivo<T extends Registro> {
   public T read(int id) throws Exception {
     // pos ← buscar o ID no índice
     ParIDEndereco p = indiceDireto.read(id);
-    //se pos ≠ -1
+    // se pos ≠ -1
     if (p == null)
       return null;
 
-    //então mover o ponteiro para pos
+    // então mover o ponteiro para pos
     arquivo.seek(p.getEndereco());
 
     // ler registro
@@ -73,7 +73,7 @@ public class Arquivo<T extends Registro> {
       T entidade = construtor.newInstance();
       entidade.fromByteArray(ba);
 
-      //confrimação
+      // confirmação
       if (entidade.getID() == id)
         return entidade;
     }
@@ -88,41 +88,36 @@ public class Arquivo<T extends Registro> {
     if (p == null)
       // mover o ponteiro para pos
       arquivo.seek(p.getEndereco());
-    //ler registro
+    // ler registro
     int tamanho = arquivo.readShort();
     byte[] ba = new byte[tamanho];
     byte lapide = arquivo.readByte();
 
-    if (lapide != '#') {
+    if (lapide != '*') {
       // extrair objeto do registro
       arquivo.read(ba);
-      T entidade = construtor.newInstance();
-      entidade.fromByteArray(ba);
-      //cria novo registro
+      // cria novo registro
       ba = novaEntidade.toByteArray();
       arquivo.writeByte('#');
 
-    if(tamanho <= ba.length){
-      // mover o ponteiro para pos
-      arquivo.seek(p.getEndereco());
-      //excrever novo registro mantendo ind.tamanho
-    }else{
-      //mover para pos
-      arquivo.writeByte('*');
-      //move pro fim do arquivo
-      arquivo.writeShort(ba.length);
-      //posição do ponteiro
+      if (tamanho <= ba.length) {
+        // mover o ponteiro para pos
+        arquivo.seek(p.getEndereco());
+        // escrever novo registro mantendo ind.tamanho
+      } else {
+        // mover para pos
+        arquivo.writeByte('*');
+        // move pro fim do arquivo
+        arquivo.writeShort(ba.length);
+        // posição do ponteiro
 
-      //escrever novo registro
-      arquivo.write(ba);
-      //atualizar o endereço para o id no indice
-      
+        // escrever novo registro
+        arquivo.write(ba);
+        // atualizar o endereço para o id no indice
+
+      }
+
     }
-
-    if (novaEntidade.getID() == novaEntidade.getID())
-      return true;
-  }
-
 
     return false;
   };
@@ -131,27 +126,27 @@ public class Arquivo<T extends Registro> {
     // pos ← buscar o ID no índice
     ParIDEndereco p = indiceDireto.read(id);
 
-    if (p == null){
+    if (p == null) {
       return false;
     }
-    
+
     // mover o ponteiro para pos
     arquivo.seek(p.getEndereco());
 
-    //ler registro  
+    // ler registro
     byte lapide = arquivo.readByte();
-    
+
     if (lapide != '*') {
       // mover para pos
       arquivo.seek(p.getEndereco());
-      //lápide excuído
+      // lápide excuído
       arquivo.writeByte('*');
-      //remover indice
+      // remover indice
       indiceDireto.delete(id);
-      
+
       return true;
     }
-    
+
     return false;
   };
 

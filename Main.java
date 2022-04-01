@@ -5,7 +5,7 @@ public class Main {
 
   private static Scanner console = new Scanner(System.in);
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
 
     int opcao;
     do {

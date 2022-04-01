@@ -40,7 +40,7 @@ public class InteracoesClientes {
             "\nEmail: " + l.getEmail());
     }
   
-    public void menuClientes() {
+    public void menuClientes() throws Exception {
       int opcao;
       do {
         System.out.println("\nMENU DE Clientes");
