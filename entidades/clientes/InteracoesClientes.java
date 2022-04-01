@@ -73,7 +73,7 @@ public class InteracoesClientes {
           case 0:
             break;
           default:
-            System.out.println("Opcao inválida");
+            System.out.println("Opção inválida");
         }
       } while (opcao != 0);
     }
@@ -158,7 +158,7 @@ public class InteracoesClientes {
           case 0:
             break;
           default:
-            System.out.println("Opcao inválida");
+            System.out.println("Opção inválida");
         }
       } while (opcao != 0);
 
