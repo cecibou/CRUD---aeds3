@@ -50,7 +50,7 @@ public class InteracoesClientes {
         System.out.println("4) Excluir Cliente");
         System.out.println("\n0) Retornar ao menu anterior");
   
-        System.out.print("\nOpção: ");
+        System.out.print("\nOpcao: ");
         try {
           opcao = Integer.valueOf(console.nextLine());
         } catch (NumberFormatException e) {
@@ -73,7 +73,7 @@ public class InteracoesClientes {
           case 0:
             break;
           default:
-            System.out.println("Opção inválida");
+            System.out.println("Opcao inválida");
         }
       } while (opcao != 0);
     }
@@ -158,7 +158,7 @@ public class InteracoesClientes {
           case 0:
             break;
           default:
-            System.out.println("Opção inválida");
+            System.out.println("Opcao inválida");
         }
       } while (opcao != 0);
 

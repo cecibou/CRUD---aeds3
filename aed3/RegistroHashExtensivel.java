@@ -1,5 +1,5 @@
 /*
-REGISTRO HASH EXTENSÍVEL
+REGISTRO HASH EXTENSIVEL
 
 Esta interface apresenta os métodos que os objetos
 a serem incluídos na tabela hash extensível devem 

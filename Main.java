@@ -14,7 +14,7 @@ public class Main {
       System.out.println("2) Clientes");
       System.out.println("\n0) Sair");
 
-      System.out.print("\nOpção: ");
+      System.out.print("\nOpcao: ");
       try {
         opcao = Integer.valueOf(console.nextLine());
       } catch (NumberFormatException e) {
@@ -31,7 +31,7 @@ public class Main {
         case 0:
           break;
         default:
-          System.out.println("Opção inválida");
+          System.out.println("Opcao inválida");
       }
 
     } while (opcao != 0);

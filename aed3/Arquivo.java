@@ -29,7 +29,7 @@ public class Arquivo<T extends Registro> {
     arquivo.seek(0);
     // ler últimoID
     int ultimoID = arquivo.readInt();
-    // bjeto.ID ← últimoID + 1
+    // objeto.ID <= últimoID + 1
     int novoID = ultimoID + 1;
 
     entidade.setID(novoID);
@@ -53,7 +53,7 @@ public class Arquivo<T extends Registro> {
   };
 
   public T read(int id) throws Exception {
-    // pos ← buscar o ID no índice
+    // pos <= buscar o ID no índice
     ParIDEndereco p = indiceDireto.read(id);
     // se pos ≠ -1
     if (p == null)
@@ -83,7 +83,7 @@ public class Arquivo<T extends Registro> {
   };
 
   public boolean update(T novaEntidade) throws Exception {
-    // pos ← buscar o ID no índice
+    // pos <= buscar o ID no índice
     ParIDEndereco p = indiceDireto.read(novaEntidade.getID());
     if (p == null)
       // mover o ponteiro para pos
@@ -123,7 +123,7 @@ public class Arquivo<T extends Registro> {
   };
 
   public boolean delete(int id) throws Exception {
-    // pos ← buscar o ID no índice
+    // pos <= buscar o ID no índice
     ParIDEndereco p = indiceDireto.read(id);
 
     if (p == null) {
