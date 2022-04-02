@@ -1,8 +1,8 @@
 # CRUD---aeds3
 
 ## Aluna
-Nome: Cecilia Capurucho Bouchardet
-Matrícula: 726020
+- Nome: Cecilia Capurucho Bouchardet
+- Matrícula: 726020
 
 ## Minha experiência com o trabalho
 
