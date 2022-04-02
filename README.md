@@ -1,4 +1,9 @@
 # CRUD---aeds3
+
+## Aluna
+Nome: Cecilia Capurucho Bouchardet
+Matrícula: 726020
+
 ## Minha experiência com o trabalho
 
 O trabalho prático está completo em visão dos requisitos onde possui todas as operações do CRUD(Create, Read, Uptade e Delete) de um arquivo indexado e as interaçõesdos 
