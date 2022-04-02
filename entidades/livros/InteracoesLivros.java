@@ -46,11 +46,13 @@ public class InteracoesLivros {
   }
 
   public void mostraLivro(Livro l) {
+    if(l != null){
     System.out.println(
         "\nTítulo: " + l.getTitulo() +
             "\nAutor: " + l.getAutor() +
             "\nPreço: R$ " + l.getPreco() +
             "\nData de lançamento: " + l.getLancamento());
+    }
   }
 
   public void menuLivros() throws Exception {
@@ -125,7 +127,12 @@ public class InteracoesLivros {
 
     try {
       Livro l = arqLivros.read(id);
-      mostraLivro(l);
+      if(l != null){
+        mostraLivro(l);
+      }else{
+        System.out.println("Livro não encontrado");
+      }
+      
     } catch (Exception e) {
       System.out.println("Erro no acesso ao arquivo");
       e.printStackTrace();
@@ -135,7 +142,7 @@ public class InteracoesLivros {
 
   public void alterarLivro() throws Exception{
     int id;
-      System.out.print("\nID do Cliente: ");
+      System.out.print("\nID do Livro: ");
       try {
         id = Integer.valueOf(console.nextLine());
       } catch (NumberFormatException e) {
@@ -193,6 +200,7 @@ public class InteracoesLivros {
       } while (opcao != 0);
       
       arqLivros.update(l);
+      //System.out.println("Livro alterado");
   }
 
   public void excluirLivro(){

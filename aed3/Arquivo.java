@@ -85,38 +85,39 @@ public class Arquivo<T extends Registro> {
   public boolean update(T novaEntidade) throws Exception {
     // pos <= buscar o ID no índice
     ParIDEndereco p = indiceDireto.read(novaEntidade.getID());
-    if (p == null)
-      // mover o ponteiro para pos
-      arquivo.seek(p.getEndereco());
+    if (p == null){
+      return false;
+    }
+    // mover o ponteiro para pos
+    arquivo.seek(p.getEndereco());
     // ler registro
-    int tamanho = arquivo.readShort();
-    byte[] ba = new byte[tamanho];
     byte lapide = arquivo.readByte();
+    int tamanho = arquivo.readShort();
 
     if (lapide != '*') {
-      // extrair objeto do registro
-      arquivo.read(ba);
-      // cria novo registro
-      ba = novaEntidade.toByteArray();
-      arquivo.writeByte('#');
+      byte[] ba = novaEntidade.toByteArray();
+      int tamanhoNovo = ba.length;  
 
-      if (tamanho <= ba.length) {
-        // mover o ponteiro para pos
-        arquivo.seek(p.getEndereco());
+      if (tamanhoNovo <= tamanho) {
         // escrever novo registro mantendo ind.tamanho
+        arquivo.write(ba);
+
       } else {
-        // mover para pos
+        //move endereço para lápide
+        arquivo.seek(p.getEndereco());
         arquivo.writeByte('*');
         // move pro fim do arquivo
-        arquivo.writeShort(ba.length);
-        // posição do ponteiro
-
+        arquivo.seek(arquivo.length());
+        //guarda endereço do registro
+        long endereco = arquivo.getFilePointer();
+        arquivo.writeByte('#');
+        arquivo.writeShort(tamanhoNovo);
         // escrever novo registro
         arquivo.write(ba);
         // atualizar o endereço para o id no indice
-
+        indiceDireto.update(new ParIDEndereco(novaEntidade.getID(), endereco));
       }
-
+        return true;
     }
 
     return false;

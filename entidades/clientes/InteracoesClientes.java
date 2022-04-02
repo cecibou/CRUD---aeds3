@@ -35,9 +35,11 @@ public class InteracoesClientes {
     }
   
     public void mostraCliente(Cliente l) {
-      System.out.println(
+      if(l != null){
+        System.out.println(
             "\nNome: " + l.getNome() +
             "\nEmail: " + l.getEmail());
+      }      
     }
   
     public void menuClientes() throws Exception {
@@ -112,7 +114,11 @@ public class InteracoesClientes {
   
       try {
         Cliente l = arqClientes.read(id);
+      if(l != null){
         mostraCliente(l);
+      }else{
+        System.out.println("Cliente não encontrado");
+      }
       } catch (Exception e) {
         System.out.println("Erro no acesso ao arquivo");
         e.printStackTrace();
@@ -134,7 +140,7 @@ public class InteracoesClientes {
       do {
         System.out.println("\nMENU PARA ALTERAR CLIENTES");
         System.out.println("\n1) Alterar Nome");
-        System.out.println("2) Buscar Cliente");
+        System.out.println("2) Alterar Email");
         System.out.println("\n0) Retornar ao menu anterior");
   
         System.out.print("\nOpção: ");
