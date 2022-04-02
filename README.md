@@ -3,7 +3,7 @@
 
 O trabalho prático está completo em visão dos requisitos onde possui todas as operações do CRUD(Create, Read, Uptade e Delete) de um arquivo indexado e as interaçõesdos 
 objetos e utilizado a tabela hash. Há um Menu para escolher entre clientes e livros e também outro menu para escolher as operações do CRUD. Todas as operações 
-estãofuncionando tanto para livros quanto para clientes. A operação mais difícil entre as 4 do CRUD foi a do Update, pois tem a diferença quando o arquivo ocorre a 
+estão funcionando tanto para livros quanto para clientes. A operação mais difícil entre as 4 do CRUD foi a do Update, pois tem a diferença quando o arquivo ocorre a 
 modificação de tamanho pra maior. Os desafios sempre são os bugs e as respostas aos erros que o programa mostra. Os resultados foram satisfatórios por eu conseguir fazer 
 todas as operações pedidas nas instruções do trabalho prático.
 
